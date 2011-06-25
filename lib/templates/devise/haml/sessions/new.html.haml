@@ -1,0 +1,18 @@
+%section.devise-sessions.new
+  %header.devise-sessions.new
+    %h1= t 'devise.sessions.new.title', :default => "Sign In"
+
+  = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+    = devise_error_messages!
+
+    = form.inputs do
+      = form.input :email
+      = form.input :password
+      - if devise_mapping.rememberable?
+        = form.input :remember_me, :as => :boolean
+
+    = form.buttons do
+      = form.commit_button "Sign in"
+
+  %footer.devise-sessions.new
+    = render 'footer'

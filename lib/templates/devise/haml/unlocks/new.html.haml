@@ -1,0 +1,15 @@
+%section.devise-unlocks.new
+  %header.devise-unlocks.new
+    %h1= t 'devise.unlocks.new.title', :default => "Resend unlock instructions"
+
+  = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+    = devise_error_messages!
+
+    = form.inputs do
+      = form.input :email
+
+    = form.buttons do
+      = form.commit_button "Resend unlock instructions"
+
+  %footer.devise-unlocks.new
+    = render 'footer'

@@ -1,0 +1,7 @@
+- replace :title, "New <%= human_name %>"
+%article.<%= singular_table_name %>.new
+  = render "form"
+  %footer.<%= singular_table_name %>
+    %nav>
+      %ul<>
+        %li.index<>= link_to "Back", <%= plural_table_name %>_path, :class => "button"

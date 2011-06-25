@@ -1,0 +1,12 @@
+- replace :title, @<%= singular_table_name %>
+%article.<%= singular_table_name %>
+  %header.<%= singular_table_name %>
+    %h1= @<%= singular_table_name %>
+  <% attributes.reject { |attribute| [:updated_at, :created_at].include? attribute }.each do |attribute| -%>
+  .<%= attribute.name %>= @<%= singular_table_name %>.<%= attribute.name %>
+  <% end -%>
+  %footer
+    %nav>
+      %ul<>
+        %li.edit<>= link_to "Edit", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :class => "button"
+        %li.destroy<>= link_to "Destroy", <%= singular_table_name %>_path(@<%= singular_table_name %>), :method => "delete", :confirm => "Are you sure?", :class => "danger button"

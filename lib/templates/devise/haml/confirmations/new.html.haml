@@ -1,0 +1,15 @@
+%section.devise-confirmations.new
+  %header.devise-confirmations.new
+    %h1= t 'devise.confirmations.new.title', :default => "Resend confirmation instructions"
+
+  = semantic_form_for resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post } do |form|
+    = devise_error_messages!
+
+    = form.inputs do
+      = form.input :email
+
+    = form.buttons do
+      = form.commit_button "Resend confirmation instructions"
+
+  %footer.devise-confirmations.new
+    = render :partial => "footer"

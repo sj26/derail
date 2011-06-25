@@ -1,0 +1,17 @@
+- replace :title, "<%= plural_name.humanize %>"
+
+%section.<%= plural_table_name %>
+  - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+    %article.<%= singular_table_name %>
+      %header.<%= singular_table_name %>
+        %h1= <%= singular_table_name %>.name
+      %footer.<%= singular_table_name %>
+        %nav
+          %ul
+            %li.edit<>= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "button"
+            %li.destroy<>= link_to 'Destroy', <%= singular_table_name %>, :confirm => 'Are you sure?', :method => :delete, :class => "danger button"
+
+  %footer.<%= singular_table_name %>
+    %nav>
+      %ul<>
+        %li.new<>= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, :class => "button"
