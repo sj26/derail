@@ -150,4 +150,28 @@ in_root do
   ["ego", "bundler", "rspec", "cucumber"].each do |guard|
     run "guard init #{guard}"
   end
+
+  # TODO: Install devise
+  # TODO: Make optional
+  #generate "railsex:devise"
+
+  # TODO: Layouts
+  # TODO: Make optional
+  #generate "railsex:layout"
+
+  # TODO: Home
+  # TODO: Make optional
+  #generate "railsex:home"
+
+  # TODO: Dashboard
+  # TODO: Make optional
+  #generate "railsex:dashboard"
+
+  # TODO: Admin
+  # TODO: Make optional
+  #generate "railsex:admin"
+
+  # TODO: Pages
+  # TODO: Make optional
+  #generate "railsex:pages"
 end
