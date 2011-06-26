@@ -131,4 +131,8 @@ in_root do
   # Install rspec
   # TODO: Make optional
   generate "rspec:install"
+
+  # Install cucumber
+  # TODO: Make optional
+  generate "cucumber:install"
 end
