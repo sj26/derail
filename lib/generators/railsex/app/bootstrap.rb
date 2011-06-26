@@ -15,10 +15,6 @@ class ::String
   end unless method_defined? :redent
 end
 
-unless Gem.available? "bundler", ">=1.1.pre"
-  raise "You need at least bundler 1.1 so we can GitHub in our Gemfile. It's still in pre-release, so install with:\n\n  gem install bundler --pre"
-end
-
 # The intention here is to bootstrap far enough that we can run some
 # of our own generators, but prevent bundling too many times.
 
@@ -26,7 +22,7 @@ in_root do
   say_status :rewrite, "Gemfile"
 
   puts "Railsex running from: #{__FILE__}"
-  railsex_gemfile_entry = "gem 'railsex', :github => 'sj26/railsex'"
+  railsex_gemfile_entry = "gem 'railsex', :git => 'git://github.com/sj26/railsex.git'"
   unless __FILE__ =~ /^https?\:\/\//
     railsex_gemfile_entry = "gem 'railsex', :path => '#{File.expand_path("../../../../../", __FILE__)}'"
   end
@@ -55,7 +51,7 @@ in_root do
   RUBY
 
   inject_into_file "Gemfile", <<-RUBY.dedent, :after => "gem 'sass-rails'.*?\n", :verbose => false
-    gem "compass", :github => "sj26/compass", :branch => "rails31"
+    gem "compass", :git => "git://github.com/sj26/compass.git", :branch => "rails31"
   RUBY
 
   inject_into_file "Gemfile", <<-RUBY.dedent, :after => "gem 'coffee-script'.*?\n", :verbose => false
@@ -67,7 +63,7 @@ in_root do
 
   append_file "Gemfile", <<-RUBY.dedent, :verbose => false
     # Views helpers
-    gem 'nestive', :github => 'sj26/nestive'
+    gem 'nestive', :git => 'git://github.com/sj26/nestive.git'
     gem 'formtastic', '~> 2.0.0.rc2'
 
     group :development, :test do
@@ -97,7 +93,7 @@ in_root do
       # Remarkable matchers for terse and expressive specs
       gem 'remarkable'
       gem 'remarkable_activerecord'
-      gem 'remarkable_devise', :github => 'sj26/remarkable_devise'
+      gem 'remarkable_devise', :git => 'git://github.com/sj26/remarkable_devise.git'
     end
 
     # When testing on the mac in guard...

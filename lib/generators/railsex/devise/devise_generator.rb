@@ -4,7 +4,8 @@ module Railsex::Generators
       inject_into_file "Gemfile", <<-RUBY.dedent, :before => "group :development"
         # Authentication
         # FIXME: Until at least controller inheritence is available
-        gem "devise", :github => "sj26/devise", :branch => "template-inheritence"
+        gem "devise", :git => "git://github.com/sj26/devise.git", :branch => "template-inheritence"
+
       RUBY
 
       bundle
