@@ -99,4 +99,20 @@ in_root do
       gem 'rb-fsevent'
     end
   RUBY
+
+  # Add action mailer defaults
+  inject_into_file "config/environments/development.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+
+    # Development URL
+    config.action_mailer.default_url_options = { :host => '#{app_const_base.underscore}.dev' }
+
+    # Send mail via MailCatcher
+    config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
+  RUBY
+
+  inject_into_file "config/environments/test.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+
+    # Testing URL
+    config.action_mailer.default_url_options = { :host => '#{app_const_base.underscore}.test' }
+  RUBY
 end
