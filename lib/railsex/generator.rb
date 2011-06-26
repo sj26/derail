@@ -143,4 +143,11 @@ in_root do
   RUBY
 
   # TODO: Insert RR cucumber support
+
+  # Install guard
+  # TODO: Make optional
+  say_status :create, "Guardfile"
+  ["ego", "bundler", "rspec", "cucumber"].each do |guard|
+    run "guard init #{guard}"
+  end
 end
