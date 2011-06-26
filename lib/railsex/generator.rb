@@ -135,4 +135,12 @@ in_root do
   # Install cucumber
   # TODO: Make optional
   generate "cucumber:install"
+
+  # Switch to RR
+  gsub_file "spec/spec_helper.rb", /[ \t]*# == Mock Framework\n(.*)\n[ \t]*config\.mock_with[ \t]*\S+\n/m, <<-RUBY.redent(2)
+    # == Mock Framework
+    config.mock_with :rr
+  RUBY
+
+  # TODO: Insert RR cucumber support
 end
