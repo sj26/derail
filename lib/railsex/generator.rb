@@ -115,4 +115,13 @@ in_root do
     # Testing URL
     config.action_mailer.default_url_options = { :host => '#{app_const_base.underscore}.test' }
   RUBY
+
+  # Write rvmrc
+  rvm_string = ENV["rvm_ruby_string"] || ""
+  rvm_string += "@#{ENV["rvm_gemset_name"]}" if ENV["rvm_gemset_name"].present?
+  if rvm_string.present?
+    create_file ".rvmrc", <<-RVMRC.dedent
+      rvm #{rvm_string} --create
+    RVMRC
+  end
 end
