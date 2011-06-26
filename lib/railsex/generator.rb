@@ -124,4 +124,11 @@ in_root do
       rvm #{rvm_string} --create
     RVMRC
   end
+
+  # We need to bundle before continuing
+  run_bundle
+
+  # Install rspec
+  # TODO: Make optional
+  generate "rspec:install"
 end
