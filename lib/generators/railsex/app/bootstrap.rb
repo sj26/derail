@@ -37,6 +37,10 @@ in_root do
     #{railsex_gemfile_entry}
   RUBY
 
+  # Get rid of some noise (after rails entry used above)
+  gsub_file "Gemfile", /^(^#[^\n]*\n)#[ \t]*gem[^\n]*\n/, "", :verbose => false
+  gsub_file "Gemfile", /\n{3,}/, "\n\n", :verbose => false
+
   if not options[:skip_active_record] and gem_for_database == "pg"
     inject_into_file "Gemfile", "# PostgreSQL is for winners!\n", :before => "gem 'pg'", :verbose => false
     inject_into_file "Gemfile", <<-RUBY.dedent, :after => database_gemfile_entry, :verbose => false

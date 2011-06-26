@@ -1,4 +1,4 @@
-require 'railsex/core_ext'
+require 'railsex/core_ext/string'
 
 module Railsex
   VERSION = File.read(File.expand_path("../../VERSION", __FILE__)).strip
@@ -6,5 +6,8 @@ module Railsex
   extend ActiveSupport::Autoload
 
   autoload :Engine
-  autoload :Generator
+  autoload :Generators
+  autoload_under :ActiveRecord do
+    autoload :Unique
+  end
 end
