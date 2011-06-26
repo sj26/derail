@@ -9,7 +9,7 @@ Some of this stuff may graduate into gems or get contributed back to other proje
 ## Features
 
 * Generators:
-  * `haml:devise`: Installs fully-localizable, HTML5, formtastic Devise HAML templates.
+  * `railsex:devise:haml`: Installs fully-localizable, HTML5, formtastic Devise HAML templates.
 * Updated scaffold templates:
   * HTML5, formtastic scaffold HAML templates.
   * [Responder](https://github.com/rails/rails/tree/3-1-stable/actionpack/lib/action_controller/metal/responder.rb)-based scaffold controller.
