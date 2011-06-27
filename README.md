@@ -32,7 +32,7 @@ Some of this stuff may graduate into gems or get contributed back to other proje
 * Helpers:
   * Activated link helper, adapted from a few places. Documentation coming.
   * Flashes helper, lists all your flashes in aside elements.
-  * Text helper with *working* truncate_html using Hpricot.
+  * Text helper with *working* truncate\_html using Hpricot.
 * Vendored javascripts:
   * [modernizr](http://www.modernizr.com/).
   * [innershiv](http://jdbartlett.com/innershiv/) and [jQuery innershiv](http://tomcoote.co.uk/javascript/ajax-html5-in-ie/).
@@ -48,7 +48,7 @@ To create a new app, I run:
 
 For handyness in [zsh](http://zsh.org):
 
-    derail() { rails new $1 --skip-test-unit --database=postgresql --template http://sj26.com/derail $@[2,-1] }
+    function derail() { rails new $1 --skip-test-unit --database=postgresql --template http://sj26.com/derail $@[2,-1] }
 
 then
 
