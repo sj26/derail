@@ -1,4 +1,4 @@
-module Railsex
+module Derail
   module Generators
     module Devise
       class HamlGenerator < Rails::Generators::Base

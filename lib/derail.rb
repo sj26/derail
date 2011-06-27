@@ -1,6 +1,6 @@
-require 'railsex/core_ext/string'
+require 'derail/core_ext/string'
 
-module Railsex
+module Derail
   VERSION = File.read(File.expand_path("../../VERSION", __FILE__)).strip
 
   extend ActiveSupport::Autoload

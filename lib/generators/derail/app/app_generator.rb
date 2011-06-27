@@ -1,4 +1,4 @@
-module Railsex::Generators
+module Derail::Generators
   class AppGenerator < Base
     def configure_database
       # The original is full of noise, ick.
@@ -24,9 +24,9 @@ module Railsex::Generators
           adapter: postgresql
           encoding: unicode
           pool: 5
-          database: \#{ENV["DATABASE"]}
-          username: \#{ENV["DATABASE_USERNAME"]}
-          password: \#{ENV["DATABASE_PASSWORD"]}
+          database: <%= ENV["DATABASE"] %>
+          username: <%= ENV["DATABASE_USERNAME"] %>
+          password: <%= ENV["DATABASE_PASSWORD"] %>
       RUBY
     end
 
@@ -90,45 +90,50 @@ module Railsex::Generators
       end
     end
 
+    def generate_formtastic
+      # TODO: Make optional
+      generate "formtastic:install"
+    end
+
     def generate_layouts
       # TODO: Layouts
       # TODO: Make optional
-      #generate "railsex:layout"
+      #generate "derail:layout"
     end
 
     def generate_home
       # TODO: Home
       # TODO: Make optional
-      #generate "railsex:home"
+      #generate "derail:home"
     end
 
     def generate_devise
       # TODO: Make optional
-      generate "railsex:devise"
+      generate "derail:devise"
     end
 
     def generate_dashboard
       # TODO: Dashboard
       # TODO: Make optional
-      #generate "railsex:dashboard"
+      #generate "derail:dashboard"
     end
 
     def generate_admin
       # TODO: Admin
       # TODO: Make optional
-      #generate "railsex:admin"
+      #generate "derail:admin"
     end
 
     def generate_pages
       # TODO: Pages
       # TODO: Make optional
-      #generate "railsex:pages"
+      #generate "derail:pages"
     end
 
     def generate_errors
       # TODO: Error handling
       # TODO: Make optional
-      #generate "railsex:errors"
+      #generate "derail:errors"
     end
 
     def remove_index

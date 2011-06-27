@@ -21,16 +21,16 @@ end
 in_root do
   say_status :rewrite, "Gemfile"
 
-  puts "Railsex running from: #{__FILE__}"
-  railsex_gemfile_entry = "gem 'railsex', :git => 'git://github.com/sj26/railsex.git'"
+  puts "Derail running from: #{__FILE__}"
+  derail_gemfile_entry = "gem 'derail', :git => 'git://github.com/sj26/derail.git'"
   unless __FILE__ =~ /^https?\:\/\//
-    railsex_gemfile_entry = "gem 'railsex', :path => '#{File.expand_path("../../../../../", __FILE__)}'"
+    derail_gemfile_entry = "gem 'derail', :path => '#{File.expand_path("../../../../../", __FILE__)}'"
   end
 
   inject_into_file "Gemfile", <<-RUBY.dedent, :after => rails_gemfile_entry, :verbose => false
 
     # Rails extensions
-    #{railsex_gemfile_entry}
+    #{derail_gemfile_entry}
   RUBY
 
   # Get rid of some noise (after rails entry used above)
@@ -91,9 +91,8 @@ in_root do
 
     group :test do
       # Remarkable matchers for terse and expressive specs
-      gem 'remarkable'
-      gem 'remarkable_activerecord'
-      gem 'remarkable_devise', :git => 'git://github.com/sj26/remarkable_devise.git'
+      gem 'remarkable', '>= 4.0.0.alpha'
+      gem 'remarkable_activerecord', '>= 4.0.0.alpha'
     end
 
     # When testing on the mac in guard...
@@ -119,5 +118,5 @@ in_root do
   run_bundle
 
   # Now we do some real work
-  generate "railsex:app"
+  generate "derail:app"
 end
