@@ -5,9 +5,11 @@ module Derail
 
   extend ActiveSupport::Autoload
 
-  autoload :Engine
+  require 'derail/engine'
+
   autoload :Generators
   autoload_under :ActiveRecord do
     autoload :Unique
   end
 end
+
