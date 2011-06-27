@@ -54,7 +54,7 @@ module Derail::Generators
         config.generators.stylesheet_engine = :sass
       RUBY
 
-      bundle "exec", "sass-convert", "app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.sass"
+      bundle_run "sass-convert", "app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.sass"
       remove_file "app/assets/stylesheets/application.css"
     end
 
@@ -86,7 +86,7 @@ module Derail::Generators
       # TODO: Make optional
       say_status :create, "Guardfile"
       ["ego", "bundler", "rspec", "cucumber"].each do |guard|
-        bundle "exec", "guard", "init", guard
+        bundle_run "guard", "init", guard
       end
     end
 

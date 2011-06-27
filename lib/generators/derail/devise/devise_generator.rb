@@ -8,7 +8,7 @@ module Derail::Generators
 
       RUBY
 
-      inject_into_file "Gemfile", <<-RUBY.dedent, :after => /gem (['"])remarkable_activerecord\1[^\n]*\n/
+      inject_into_file "Gemfile", <<-RUBY.redent(2), :after => /gem (['"])remarkable_activerecord\1[^\n]*\n/
         gem 'remarkable_devise', :git => 'git://github.com/sj26/remarkable_devise.git'
       RUBY
 
@@ -18,7 +18,7 @@ module Derail::Generators
     def generate_devise
       generate "devise:install"
       generate "devise", "user"
-      generate "derail:devise:haml"
+      generate "derail:devise:haml";
     end
   end
 end
