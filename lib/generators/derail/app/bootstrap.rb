@@ -114,6 +114,8 @@ in_root do
     RVMRC
   end
 
+  run "rvm rvmrc trust ."
+
   # We need to bundle before continuing
   run_bundle
 
