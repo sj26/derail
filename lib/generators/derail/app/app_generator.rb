@@ -50,8 +50,9 @@ module Derail::Generators
     def configure_sass
       inject_into_file "config/application.rb", <<-RUBY.redent(4), :after => /config\.assets[^\n]*\n/
 
-        # Use SASS by default
-        config.generators.stylesheet_engine = :sass
+        # Use SASS syntax (not SCSS)
+        config.sass.preferred_syntax = :sass
+        config.sass.style = :nested
       RUBY
 
       bundle_run "sass-convert", "app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.sass"

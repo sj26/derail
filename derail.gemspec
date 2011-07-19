@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "railties", ">= 3.1.rc4"
   s.add_dependency "formtastic", ">= 2.0.0.rc3"
+  s.add_dependency "hpricot"
 end

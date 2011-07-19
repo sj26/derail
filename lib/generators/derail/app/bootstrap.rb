@@ -109,7 +109,8 @@ in_root do
   rvm_string = ENV["rvm_ruby_string"] || ""
   rvm_string += "@#{ENV["rvm_gemset_name"]}" if ENV["rvm_gemset_name"].present?
   if rvm_string.present?
-    create_file ".rvmrc", <<-RVMRC.dedent
+    say_status :create, ".rvmrc (#{rvm_string})"
+    create_file ".rvmrc", <<-RVMRC.dedent, :verbose => false
       rvm #{rvm_string} --create
     RVMRC
   end
@@ -117,8 +118,8 @@ in_root do
   run "rvm rvmrc trust ."
 
   # We need to bundle before continuing
-  run_bundle
+  run "bundle install"
 
   # Now we do some real work
-  generate "derail:app"
+  run "rails generate derail:app"
 end

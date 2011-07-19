@@ -4,21 +4,28 @@ module Derail::Generators
 
   protected
 
-    def rvm *args
-      options = args.extract_options!
-      say_status :run, "rvm #{args * " "}" # unless options[:verbose] === false
-      system (["rvm"] + args) * " "
-    end
-
-    def rvm_run *args
-      args << args.extract_options!.merge(:verbose => false)
-      rvm "--with-rubies", "default-with-rvmrc", "exec", *args
+    # Adapted from escape gem
+    def shell_escape *words
+      words.map do |word|
+        if word.empty?
+          "''"
+        elsif %r{\A[0-9A-Za-z+,./:=@_-]+\z} =~ word
+          word
+        else
+          word.scan(/('+)|[^']+/).map do
+            if $1
+              %q{\'} * $1.length
+            else
+              "'#{$&}'"
+            end
+          end.join
+        end
+      end.join " "
     end
 
     def bundle *args
       options = args.extract_options!
-      say_status :run, "bundle #{args * " "}" # unless options[:verbose] === false
-      rvm_run "bundle", *args
+      in_root { run "env"; run shell_escape("bundle", *args), options }
     end
 
     def bundle_run *args
@@ -27,7 +34,7 @@ module Derail::Generators
     end
 
     # Override run to run in our rvm/bundle
-    alias run bundle_run
+    # alias run bundle_run
 
     # Override generate to run in bundle
     def generate *args

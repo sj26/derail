@@ -44,15 +44,17 @@ Some of this stuff may graduate into gems or get contributed back to other proje
 
 To create a new app, I run:
 
-    rails new APPNAME --skip-test-unit --database=postgresql --template http://sj26.com/derail
+    rails new APPNAME --skip-test-unit --skip-bundle --database=postgresql --template http://sj26.com/derail
 
 For handyness in [zsh](http://zsh.org):
 
-    function derail() { rails new $1 --skip-test-unit --database=postgresql --template http://sj26.com/derail $@[2,-1] }
+    function derail() { rails new $1 --skip-test-unit --skip-bundle --database=postgresql --template http://sj26.com/derail $@[2,-1] }
 
 then
 
     derail APPNAME
+
+You need to skip bundling due to a clash between rails and bundlers' vendored versions of the thor gem.
 
 ### Vendored javascripts
 
