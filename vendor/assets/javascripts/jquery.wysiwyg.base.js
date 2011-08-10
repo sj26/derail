@@ -81,7 +81,7 @@
 
 			h1: {
 				groupIndex: 7,
-				visible: true,
+				visible: false,
 				className: "h1",
 				command: ($.browser.msie || $.browser.safari) ? "FormatBlock" : "heading",
 				"arguments": ($.browser.msie || $.browser.safari) ? "<h1>" : "h1",
@@ -91,7 +91,7 @@
 
 			h2: {
 				groupIndex: 7,
-				visible: true,
+				visible: false,
 				className: "h2",
 				command: ($.browser.msie || $.browser.safari)	? "FormatBlock" : "heading",
 				"arguments": ($.browser.msie || $.browser.safari) ? "<h2>" : "h2",
@@ -101,7 +101,7 @@
 
 			h3: {
 				groupIndex: 7,
-				visible: true,
+				visible: false,
 				className: "h3",
 				command: ($.browser.msie || $.browser.safari) ? "FormatBlock" : "heading",
 				"arguments": ($.browser.msie || $.browser.safari) ? "<h3>" : "h3",
@@ -153,7 +153,7 @@
 
 			html: {
 				groupIndex: 10,
-				visible: false,
+				visible: true,
 				exec: function () {
 					var elementHeight;
 
@@ -242,7 +242,7 @@
 
 			insertHorizontalRule: {
 				groupIndex: 6,
-				visible: true,
+				visible: false,
 				tags: ["hr"],
 				tooltip: "Insert Horizontal Rule"
 			},
@@ -276,7 +276,7 @@
 
 			insertTable: {
 				groupIndex: 6,
-				visible: true,
+				visible: false,
 				exec: function () {
 					var self = this;
 
@@ -303,7 +303,7 @@
 
 			italic: {
 				groupIndex: 0,
-				visible: true,
+				visible: false,
 				tags: ["i", "em"],
 				css: {
 					fontStyle: "italic"
@@ -389,13 +389,13 @@
 
 			redo: {
 				groupIndex: 4,
-				visible: true,
+				visible: false,
 				tooltip: "Redo"
 			},
 
 			removeFormat: {
 				groupIndex: 10,
-				visible: true,
+				visible: false,
 				exec: function () {
 					this.removeFormat();
 				},
@@ -420,7 +420,7 @@
 
 			strikeThrough: {
 				groupIndex: 0,
-				visible: true,
+				visible: false,
 				tags: ["s", "strike"],
 				css: {
 					textDecoration: "line-through"
@@ -430,21 +430,21 @@
 
 			subscript: {
 				groupIndex: 3,
-				visible: true,
+				visible: false,
 				tags: ["sub"],
 				tooltip: "Subscript"
 			},
 
 			superscript: {
 				groupIndex: 3,
-				visible: true,
+				visible: false,
 				tags: ["sup"],
 				tooltip: "Superscript"
 			},
 
 			underline: {
 				groupIndex: 0,
-				visible: true,
+				visible: false,
 				tags: ["u"],
 				css: {
 					textDecoration: "underline"
@@ -455,7 +455,7 @@
 
 			undo: {
 				groupIndex: 4,
-				visible: true,
+				visible: false,
 				tooltip: "Undo"
 			},
 
@@ -491,7 +491,7 @@
 		this.defaults = {
 html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" style="margin:0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="margin:0;">INITIAL_CONTENT</body></html>',
 			debug: false,
-			controls: {},
+      controls: {},
 			css: {},
 			events: {},
 			autoGrow: false,
@@ -499,7 +499,7 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			brIE: true,					// http://code.google.com/p/jwysiwyg/issues/detail?id=15
 			formHeight: 270,
 			formWidth: 440,
-			iFrameClass: null,
+			iFrameClass: "html",
 			initialContent: "<p>Initial content</p>",
 			maxHeight: 10000,			// see autoGrow
 			maxLength: 0,
