@@ -20,14 +20,26 @@ module Derail::Generators
           username: test
           password: test
 
+        staging:
+          adapter: postgresql
+          encoding: unicode
+          pool: 5
+          database: #{app_slug}_staging
+          username: #{app_slug}_staging
+          password: #{SecureRandom.hex}
+
         production:
           adapter: postgresql
           encoding: unicode
           pool: 5
-          database: <%= ENV["DATABASE"] %>
-          username: <%= ENV["DATABASE_USERNAME"] %>
-          password: <%= ENV["DATABASE_PASSWORD"] %>
+          database: #{app_slug}_production
+          username: #{app_slug}_production
+          password: #{SecureRandom.hex}
       RUBY
+    end
+
+    def configure_staging_environment
+      copy_file "config/environments/production.rb", "config/environments/staging.rb"
     end
 
     def configure_action_mailer
