@@ -76,6 +76,15 @@ module Derail::Generators
       gsub_file "app/assets/javascripts/application.js.coffee", %r{^//}, "#"
     end
 
+    def write_htaccess
+      create_file "public/.htaccess", <<-HTACCESS.dedent
+        # Font MIME types for Apache
+        AddType application/vnd.ms-fontobject .eot
+        AddType application/octet-stream .otf .ttf
+        AddType application/x-font-woff .woff
+      HTACCESS
+    end
+
     def install_rspec
       # TODO: Make optional
       generate "rspec:install"
