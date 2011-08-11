@@ -1,0 +1,24 @@
+= extends :application do
+  %header#header
+    = area :header do
+      %h1
+        = link_to root_path do
+          <%= Rails.application.class.name.humanize %>
+  %nav#navigation>
+    = area :navigation do
+      %ul<>
+        %li<>= activated_link_to "Home", root_path
+  #canvas
+    = area :canvas do
+      - if area(:title).present?
+        %header#title
+          %h1= area :title
+      = area :flashes, flashes
+      %section#content
+        = area :content do
+          = yield
+      - if area(:sidebar).present?
+        %aside#sidebar
+          = area :sidebar
+  %footer#footer
+    = link_to "I made this", "http://sj26.com"

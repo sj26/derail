@@ -138,9 +138,8 @@ module Derail::Generators
     end
 
     def generate_layouts
-      # TODO: Layouts
       # TODO: Make optional
-      #generate "derail:layout"
+      generate "derail:layout"
     end
 
     def generate_home

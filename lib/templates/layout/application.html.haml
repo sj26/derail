@@ -1,0 +1,14 @@
+!!!
+%html.no-js
+  %head
+    %title= title
+    = area :meta do
+      = csrf_meta_tags
+    = area :stylesheets do
+      = stylesheet_link_tag "application"
+    = area :javascripts do
+      = javascript_include_tag "application"
+  %body{:class => body_classes}
+    = area :body do
+      = yield
+
