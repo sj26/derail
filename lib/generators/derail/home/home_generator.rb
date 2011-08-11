@@ -1,5 +1,5 @@
 module Derail::Generators
-  class LayoutGenerator < Base
+  class HomeGenerator < Base
     def generate_controller
       generate "controller", "home", "show"
     end
