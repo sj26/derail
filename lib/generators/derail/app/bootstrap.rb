@@ -116,6 +116,7 @@ in_root do
     RVMRC
   end
 
+  # Trust the rvmrc automagically
   run "rvm rvmrc trust ."
 
   # We need to bundle before continuing

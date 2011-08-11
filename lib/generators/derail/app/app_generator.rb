@@ -57,6 +57,16 @@ module Derail::Generators
         # Testing URL
         config.action_mailer.default_url_options = { :host => '#{app_slug}.test' }
       RUBY
+
+      inject_into_file "config/environments/staging.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+
+        # Testing URL
+        config.action_mailer.default_url_options = { :host => '#{app_slug}.test' }
+      RUBY
+    end
+
+    def staging_nginx_sendfile
+      gsub_file 'config/environments/staging.rb', 'x_sendfile_header = "X-Sendfile"', 'x_sendfile_header = "X-Accel-Redirect"'
     end
 
     def configure_sass
@@ -83,6 +93,16 @@ module Derail::Generators
         AddType application/octet-stream .otf .ttf
         AddType application/x-font-woff .woff
       HTACCESS
+    end
+
+    def disallow_robots
+      # Rewrite robots file to disallow indexing until production
+      # TODO: Make this smarter... make an engine route in not-production for disallows or override in nginx for staging
+      gsub_file "public/robots.txt", %r{^# (\S+:)}, "\\1"
+    end
+
+    def clean_routes
+      gsub_file "config/routes.rb", %r{^\s*#[^\n]*\n}, ""
     end
 
     def install_rspec
