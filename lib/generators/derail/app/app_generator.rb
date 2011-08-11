@@ -143,9 +143,8 @@ module Derail::Generators
     end
 
     def generate_home
-      # TODO: Home
       # TODO: Make optional
-      #generate "derail:home"
+      generate "derail:home"
     end
 
     def generate_devise
