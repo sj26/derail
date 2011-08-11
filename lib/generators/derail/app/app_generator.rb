@@ -39,7 +39,7 @@ module Derail::Generators
     end
 
     def configure_staging_environment
-      copy_file "config/environments/production.rb", "config/environments/staging.rb"
+      system "cp", "config/environments/production.rb", "config/environments/staging.rb"
     end
 
     def configure_action_mailer
