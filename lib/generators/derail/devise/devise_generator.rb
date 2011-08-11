@@ -12,13 +12,13 @@ module Derail::Generators
         gem 'remarkable_devise', :git => 'git://github.com/sj26/remarkable_devise.git'
       RUBY
 
-      bundle "install"
+      bundle_install
     end
 
     def generate_devise
       generate "devise:install"
       generate "devise", "user"
-      generate "derail:devise:haml";
+      generate "derail:devise:haml"
     end
 
     def insert_global_routes

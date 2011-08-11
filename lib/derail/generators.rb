@@ -25,7 +25,17 @@ module Derail::Generators
 
     def bundle *args
       options = args.extract_options!
-      in_root { run "env"; run shell_escape("bundle", *args), options }
+      in_root { run shell_escape("bundle", *args), options }
+    end
+
+    def bundle_install
+      begin
+        # XXX: Something puts "-rbundler/setup" in RUBYOPT, bad.
+        old_rubyopt = ENV.delete 'RUBYOPT'
+        bundle "install"
+      ensure
+        ENV['RUBYOPT'] = old_rubyopt
+      end
     end
 
     def bundle_run *args
