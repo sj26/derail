@@ -107,7 +107,8 @@ in_root do
 
   # Write rvmrc
   rvm_string = ENV["rvm_ruby_string"] || ""
-  rvm_string += "@#{ENV["rvm_gemset_name"]}" if ENV["rvm_gemset_name"].present?
+  # Pre-conceived RVM gemset, or create one based on app name
+  rvm_string += "@#{ENV["rvm_gemset_name"].presence || app_name.downcase}"
   if rvm_string.present?
     say_status :create, ".rvmrc (#{rvm_string})"
     create_file ".rvmrc", <<-RVMRC.dedent, :verbose => false
