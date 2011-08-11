@@ -183,5 +183,20 @@ module Derail::Generators
     def remove_rails_logo
       remove_file "app/assets/images/rails.png"
     end
+
+    def add_gitignore
+      create_file ".gitignore", <<-GITIGNORE.dedent
+        .bundle
+        log/*.log
+        tmp
+        vendor/bundle
+      GITIGNORE
+    end
+
+    def setup_git
+      git :init
+      git :add => "."
+      git :commit => "-m Derailed"
+    end
   end
 end
