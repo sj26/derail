@@ -502,7 +502,7 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			iFrameClass: "html",
 			bodyClass: "wysiwyg content",
 			bodyStyle: "margin:0;",
-			initialContent: "",
+			initialContent: "<p></p>",
 			maxHeight: 10000,			// see autoGrow
 			maxLength: 0,
 			messages: {
