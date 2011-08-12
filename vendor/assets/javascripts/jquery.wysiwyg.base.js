@@ -312,6 +312,24 @@
 				hotkey: {"ctrl": 1, "key": 73}
 			},
 
+			justifyLeft: {
+				visible: true,
+				groupIndex: 1,
+				css: {
+					textAlign: "left"
+				},
+				tooltip: "Justify Left"
+			},
+
+			justifyRight: {
+				groupIndex: 1,
+				visible: true,
+				css: {
+					textAlign: "right"
+				},
+				tooltip: "Justify Right"
+			},
+
 			justifyCenter: {
 				groupIndex: 1,
 				visible: true,
@@ -329,24 +347,6 @@
 					textAlign: "justify"
 				},
 				tooltip: "Justify Full"
-			},
-
-			justifyLeft: {
-				visible: true,
-				groupIndex: 1,
-				css: {
-					textAlign: "left"
-				},
-				tooltip: "Justify Left"
-			},
-
-			justifyRight: {
-				groupIndex: 1,
-				visible: true,
-				css: {
-					textAlign: "right"
-				},
-				tooltip: "Justify Right"
 			},
 
 			ltr: {
@@ -502,7 +502,7 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			iFrameClass: "html",
 			bodyClass: "wysiwyg content",
 			bodyStyle: "margin:0;",
-			initialContent: "<p></p>",
+			initialContent: "<p>&nbsp;</p>",
 			maxHeight: 10000,			// see autoGrow
 			maxLength: 0,
 			messages: {
@@ -1425,7 +1425,7 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 				} else {
 					self.ui.initialHeight = $(self.editorDoc).height();
 				}
-				$(self.editorDoc.body).css("border", "1px solid white"); // cancel margin collapsing
+        // $(self.editorDoc.body).css("border", "1px solid white"); // cancel margin collapsing
 
 				growHandler = function () {
 					self.ui.grow();
