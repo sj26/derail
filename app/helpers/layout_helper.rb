@@ -7,11 +7,15 @@ module LayoutHelper
     @modular_controller_name ||= controller.class.name.sub(/Controller$/, '').underscore.dasherize
   end
 
+  def modular_controller_ancestor_names
+    @modular_controller_ancestor_names ||= (controller.class.ancestors - [controller.class]).find_all { |klass| klass.name =~ /Controller$/ }.map { |klass| klass.name.sub(/Controller$/, "").underscore.dasherize }
+  end
+
   def body_classes
     @body_classes ||= [
       application_name.dasherize,
-      # TODO: Add class for each module
       modular_controller_name.parameterize,
+      modular_controller_ancestor_names.map(&:parameterize),
       [modular_controller_name, action_name].join('-').parameterize,
       ([modular_controller_name, action_name, params[:id]].join('-').parameterize if params[:id].present?),
       with_sidebar_class,
