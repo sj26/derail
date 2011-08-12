@@ -489,7 +489,7 @@
 		};
 
 		this.defaults = {
-html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" style="margin:0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="margin:0;">INITIAL_CONTENT</body></html>',
+html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" style="margin:0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="BODY_STYLE" class="BODY_CLASS">INITIAL_CONTENT</body></html>',
 			debug: false,
       controls: {},
 			css: {},
@@ -500,7 +500,9 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			formHeight: 270,
 			formWidth: 440,
 			iFrameClass: "html",
-			initialContent: "<p>Initial content</p>",
+			bodyClass: "wysiwyg content",
+			bodyStyle: "margin:0;",
+			initialContent: "",
 			maxHeight: 10000,			// see autoGrow
 			maxLength: 0,
 			messages: {
@@ -1324,6 +1326,8 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 					 * @link http://code.google.com/p/jwysiwyg/issues/detail?id=144
 					 */
 					.replace(/INITIAL_CONTENT/, function () { return self.wrapInitialContent(); })
+					.replace(/BODY_STYLE/, self.options.bodyStyle)
+					.replace(/BODY_CLASS/, self.options.bodyClass)
 			);
 			self.editorDoc.close();
 
