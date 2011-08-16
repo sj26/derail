@@ -1,6 +1,6 @@
 unless Modernizr.input.placeholder
-  $('input[placeholder]')
-    .live
+  $('input[placeholder], textarea[placeholder]')
+    .live(
       blur: ->
         input = $ this
         unless input.val()
@@ -10,6 +10,6 @@ unless Modernizr.input.placeholder
         placeholder = input.removeClass('placeholder').attr('placeholder')
         if input.val() == placeholder
           input.val("")
-    .blur()
+    ).blur()
 
 # TODO: Add a jQuery ajax dataFilter to process new HTML?
