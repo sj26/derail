@@ -79,14 +79,14 @@ in_root do
       gem 'ffaker'
 
       # Acceptance testing
-      gem 'cucumber-rails'
+      # gem 'cucumber-rails'
 
       # Continuous testing/building
       gem 'guard'
       gem 'guard-ego'
       gem 'guard-bundler'
       gem 'guard-rspec'
-      gem 'guard-cucumber'
+      # gem 'guard-cucumber'
     end
 
     group :test do
