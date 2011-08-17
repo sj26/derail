@@ -24,5 +24,9 @@ module Derail::Generators
       copy_file "application.html.haml", "app/views/layouts/application.html.haml"
       copy_file "canvas.html.haml", "app/views/layouts/canvas.html.haml"
     end
+
+    def insert_layout_into_application_controller
+      insert_into_file "app/controllers/application_controller.rb", "\n\n  layout 'canvas'", :before => "\nend"
+    end
   end
 end
