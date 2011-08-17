@@ -2,12 +2,20 @@
   %header#header
     = area :header do
       %h1
-        = link_to root_path do
-          <%= Rails.application.class.name.humanize %>
-  %nav#navigation>
-    = area :navigation do
+        = link_to application_name, root_path
+  %nav#site_nav>
+    = area :site_nav do
       %ul<>
-        %li<>= activated_link_to "Home", root_path
+        %li<>= activated_link_to t(:root, :scope => [:site_nav, :nav], :default => "Home"), root_path
+  %nav#user_nav>
+    = area :user_nav do
+      %ul<>
+        - if user_signed_in?
+          %li.user<>= activated_link_to current_user, current_user
+          %li.destroy_user_session<>= activated_link_to t(:destroy_user_session, :scope => [:user_nav, :nav], :default => 'Sign out'), destroy_user_session_path
+        - else
+          %li.new_user_session<>= activated_link_to t(:new_user_registration, :scope => [:user_nav, :nav], :default => 'Sign in'), new_user_session_path
+          %li.new_user_registration<>= activated_link_to t(:new_user_registration, :scope => [:user_nav, :nav], :default => 'Sign up'), new_user_registration_path
   #canvas
     = area :canvas do
       - if area(:title).present?

@@ -1,6 +1,14 @@
 module LayoutHelper
+  def default_application_name
+    Rails.application.class.name.split('::').first
+  end
+
   def application_name
-    Rails.application.class.name.split('::').first.underscore
+    @application_name ||= t :application_name, :default => proc { default_application_name.humanize }
+  end
+
+  def classical_application_name
+    @classical_application_name ||= default_application_name.underscore.dasherize
   end
 
   def modular_controller_name
@@ -13,7 +21,7 @@ module LayoutHelper
 
   def body_classes
     @body_classes ||= [
-      application_name.dasherize,
+      classical_application_name.underscore.dasherize,
       modular_controller_name.parameterize,
       modular_controller_ancestor_names.map(&:parameterize),
       [modular_controller_name, action_name].join('-').parameterize,
@@ -23,7 +31,7 @@ module LayoutHelper
   end
 
   def title
-    [area(:title).presence, "Career Finder"].compact.join ' - '
+    [area(:title).presence, application_name].compact.join ' - '
   end
 
   # TODO: Expand into feature or area classes...
