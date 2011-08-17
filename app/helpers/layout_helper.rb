@@ -24,6 +24,7 @@ module LayoutHelper
       classical_application_name.underscore.dasherize,
       modular_controller_name.parameterize,
       modular_controller_ancestor_names.map(&:parameterize),
+      action_name.parameterize,
       [modular_controller_name, action_name].join('-').parameterize,
       ([modular_controller_name, action_name, params[:id]].join('-').parameterize if params[:id].present?),
       with_sidebar_class,
