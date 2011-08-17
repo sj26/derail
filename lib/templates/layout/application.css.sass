@@ -1,0 +1,200 @@
+//= require_self
+//= require_tree .
+
+@import compass
+@import compass/reset
+@import compass/css3/pie
+
+$experimental-support-for-pie: true
+
+body.boxt
+  background: #fff
+
+  &.wysiwyg
+    background: none
+    padding: 0 10px
+
+  font: 14px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif
+
+  a
+    color: #3086bb
+    text-decoration: none
+    &:visited
+      color: #3086bb
+    &:hover, :active
+      text-decoration: underline
+
+  a.button, .button input, input[type="submit"], input[type="reset"], input[type="button"], button
+    +pie
+    padding: 5px 10px
+    background-color: #dddddd
+    +filter-gradient(#fafafa, #c9c9c9)
+    +background(linear-gradient(#fafafa, #c9c9c9))
+    color: #666
+    border: 0
+    +border-radius(2px)
+    +text-shadow(0 1px 0 #fff)
+    text-decoration: none
+    cursor: pointer
+    &:hover
+      background-color: #ffffff
+      +filter-gradient(#ffffff, #dddddd)
+      +background(linear-gradient(#ffffff, #dddddd))
+      color: #333333
+    &.active, &:active
+      background-color: #aaaaaa
+      +filter-gradient(#333333, #a0a0a0)
+      +background(linear-gradient(#333333, #666 10%, #666 50%, #a0a0a0))
+      color: #ffffff
+      +text-shadow(0 -1px 0 #666666)
+      +box-shadow(rgba(0,0,0,0.1) -2px 0 2px inset, rgba(0,0,0,0.1) 2px 0 2px inset)
+    &::-moz-focus-inner
+      padding: 0
+      border: 0
+    &.primary, &.create
+      font-weight: bold
+      background-color: #0092df
+      +filter-gradient(#0092df, #007ab9)
+      +background(linear-gradient(#0092df, #007ab9))
+      color: #fff
+      +text-shadow(0 1px 0 rgba(0, 0, 0, 0.3))
+      &:hover
+        background-color: lighten(#0092df, 10)
+        +filter-gradient(lighten(#0092df, 10), #0092df)
+        +background(linear-gradient(lighten(#0092df, 10), #0092df))
+      .active, &:active
+        background-color: darken(#0092df, 10)
+        +filter-gradient(darken(#0092df, 10), #0092df)
+        +background(linear-gradient(darken(#0092df, 10), #0092df))
+    &.danger
+      color: #900
+      &:hover, &:focus
+        color: #fff
+        +text-shadow(none)
+        background-color: #dc5f59
+        +background(linear-gradient(color-stops(#dc5f59, #b33630)))
+      &:active, &.active
+        color: #fff
+        background-color: #b33630
+        +background(linear-gradient(color-stops(#b33630, #dc5f59)))
+    &.pill
+      +border-radius(50em)
+    &.disable
+      opacity: 0.5
+    &.new
+      padding-left: 30px
+      +background(image-url("new.png") 10px 50% no-repeat, linear-gradient(#fafafa, #c9c9c9))
+      &:hover
+        +background(image-url("new.png") 10px 50% no-repeat, linear-gradient(#fff, #ddd))
+      &:active
+        +background(image-url("new.png") 10px 50% no-repeat, linear-gradient(#333333, #666 10%, #666 50%, #a0a0a0))
+    &.edit
+      padding-left: 30px
+      +background(image-url("edit.png") 10px 50% no-repeat, linear-gradient(#fafafa, #c9c9c9))
+      &:hover
+        +background(image-url("edit.png") 10px 50% no-repeat, linear-gradient(#fff, #ddd))
+      &:active
+        +background(image-url("edit.png") 10px 50% no-repeat, linear-gradient(#333333, #666 10%, #666 50%, #a0a0a0))
+    &.destroy
+      padding-left: 30px
+      +background(image-url("destroy.png") 10px 50% no-repeat, linear-gradient(#fafafa, #c9c9c9))
+      &:hover
+        +background(image-url("destroy.png") 10px 50% no-repeat, linear-gradient(#dc5f59, #b33630))
+      &:active
+        +background(image-url("destroy.png") 10px 50% no-repeat, linear-gradient(#b33630, #dc5f59))
+
+  .formtastic
+    li.link
+      a
+        float: left
+    li.html.input
+      label
+        width: 100%
+        float: none
+        padding: 0 0 .5em 0
+      div.wysiwyg
+        width: 97%
+        float: none
+
+  b, strong
+    font-weight: bold
+  i, em
+    font-style: italic
+
+  input.placeholder, textarea.placeholder
+    color: #666
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder
+    color: #666
+  input:-moz-placeholder, textarea:-moz-placeholder
+    color: #666
+
+  #header
+    width: 960px
+    margin: 0 auto
+
+    h1
+      padding: 10px
+      a
+        +inline-block
+        position: relative
+        z-index: 100
+        font-size: 24px
+
+  #site_nav
+    width: 960px
+    margin: 0 auto
+    ul
+      padding: 5px
+      li
+        position: relative
+        z-index: 100
+        +inline-block
+        a
+          +inline-block
+          padding: 5px
+
+  #user_nav
+    position: absolute
+    top: 0
+    width: 100%
+    ul
+      width: 960px
+      margin: 0 auto
+      text-align: right
+      li
+        position: relative
+        z-index: 100
+        +inline-block
+        text-align: left
+
+    ul
+      width: 950px
+      margin: 0 auto
+      padding: 5px
+      text-align: right
+      li
+        position: relative
+        z-index: 100
+        +inline-block
+        a
+          +inline-block
+          padding: 5px
+
+  #canvas
+    +pie-clearfix
+    width: 960px
+    margin: 0 auto
+
+    #title
+      margin: 10px
+
+    #content
+      margin: 10px
+
+  #footer
+    width: 960px
+    margin: 0 auto
+
+    a
+      +inline-block
+      margin: 10px
