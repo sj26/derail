@@ -4,7 +4,7 @@ module LayoutHelper
   end
 
   def application_name
-    @application_name ||= t :application_name, :default => proc { default_application_name.humanize }
+    @application_name ||= t :application_name, :default => proc { default_application_name.titleize }
   end
 
   def classical_application_name
