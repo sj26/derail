@@ -64,7 +64,14 @@ in_root do
   append_file "Gemfile", <<-RUBY.dedent, :verbose => false
     # Views helpers
     gem 'nestive', :git => 'git://github.com/sj26/nestive.git'
-    gem 'formtastic', '~> 2.0.0.rc2'
+    gem 'formtastic', '~> 2.0.0.rc4'
+
+    # File uploads
+    # XXX: From git for rails 3.1 compatibility
+    gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
+
+    # Concise controllers
+    gem 'inherited_resources'
 
     group :development, :test do
       # Debugging everywhere
@@ -75,7 +82,7 @@ in_root do
       gem 'rspec-rails'
       gem 'rcov'
       gem 'rr'
-      gem 'factory_girl', '~> 2.0.0.beta2'
+      gem 'factory_girl'
       gem 'ffaker'
 
       # Acceptance testing
