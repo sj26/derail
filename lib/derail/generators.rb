@@ -43,9 +43,6 @@ module Derail::Generators
       bundle "exec", *args
     end
 
-    # Override run to run in our rvm/bundle
-    # alias run bundle_run
-
     # Override generate to run in bundle
     def generate *args
       say_status :generate, args * " "

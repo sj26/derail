@@ -112,20 +112,6 @@ in_root do
     end
   RUBY
 
-  # Write rvmrc
-  rvm_string = ENV["rvm_ruby_string"] || ""
-  # Pre-conceived RVM gemset, or create one based on app name
-  rvm_string += "@#{ENV["rvm_gemset_name"].presence || app_name.downcase}"
-  if rvm_string.present?
-    say_status :create, ".rvmrc (#{rvm_string})"
-    create_file ".rvmrc", <<-RVMRC.dedent, :verbose => false
-      rvm #{rvm_string} --create
-    RVMRC
-  end
-
-  # Trust the rvmrc automagically
-  run "rvm rvmrc trust ."
-
   # We need to bundle before continuing
   run "bundle install"
 
