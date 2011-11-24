@@ -10,39 +10,31 @@ module ActivatedLinkHelper
       html_options  = args[2] || {}
     end
 
-    options = options.clone
     html_options = html_options.clone
+    url = options.is_a?(String) ? options : url_for(options)
+    match = request.fullpath.match(/^#{Regexp.escape(url)}(?:\/(.*?))?(?:\?(.*))?$/)
+    match_path = match.try :[], 1
+    match_query = match.try :[], 2
+    active = match.present?
 
-    url = url_for(options)
-    active_link_options = html_options.delete(:active) || {}
+    if html_options.delete(:exact)
+      active &&= match_path.blank?
+    end
 
-    match = request.fullpath.match(/^#{Regexp.escape(url)}(?:\/(.*)$)?/)
-
-    active = if html_options.delete(:exact)
-      match.present? and (match[1].blank? or match[1] == "/")
-    elsif paths = (html_options.delete(:only_paths).presence || html_options.delete(:only_path).presence)
-      match.present? and (match[1].blank? or match[1] == "/") || if paths.is_a? Array
-        paths.include? match[1]
+    if paths = (html_options.delete(:only_paths).presence or html_options.delete(:only_path).presence)
+      active &&= match_path.blank? || if paths.is_a? Array
+        paths.include? match_path
       elsif paths.is_a? Regexp
-        paths.match(match[1]).present?
+        paths.match(match_path).present?
       else
-        paths == match[1]
+        paths == match_path
       end
-    else
-      request.fullpath.match(/^#{Regexp.escape(url)}(\/|\?|$)/).present?
     end
 
-    css_class = if active
-      'active'
-    else
-      'inactive'
-    end
+    html_options[:class] ||= []
+    html_options[:class].split! /\s+/ if html_options[:class].is_a? String
+    html_options[:class] << "#{"in" unless active}active"
 
-    html_options[:class] ||= ''
-    html_options[:class] += " #{css_class}" if !css_class.blank?
-    html_options[:class].strip!
-    html_options.delete(:class) if html_options[:class].blank?
-
-    link_to(name, url, html_options)
+    link_to name, options, html_options
   end
 end
