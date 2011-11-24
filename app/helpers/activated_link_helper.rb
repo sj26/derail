@@ -29,7 +29,7 @@ module ActivatedLinkHelper
         paths == match[1]
       end
     else
-      request.fullpath.match(/^#{Regexp.escape(url)}(\/|$)/).present?
+      request.fullpath.match(/^#{Regexp.escape(url)}(\/|\?|$)/).present?
     end
 
     css_class = if active
