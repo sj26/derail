@@ -1,6 +1,6 @@
 %section.devise-registrations.new
   %header.devise-registrations.new
-    %h1= t 'devise.registrations.new.title', :default => "Sign Up"
+    %h1= t '.title', default: "Sign Up"
 
   = semantic_form_for resource, :as => resource_name, :url => registration_path(resource_name) do |form|
     = devise_error_messages!
@@ -10,8 +10,8 @@
       = form.input :password
       = form.input :password_confirmation
 
-    = form.buttons do
-      = form.commit_button "Sign up"
+    = form.actions do
+      = form.action :submit, label: "Sign up"
 
   %footer.devise-registrations.new
-    = render 'footer'
+    = render "footer"

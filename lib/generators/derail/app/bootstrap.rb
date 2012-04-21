@@ -45,67 +45,53 @@ in_root do
     RUBY
   end
 
-  inject_into_file "Gemfile", <<-RUBY.rstrip.dedent, :after => "# Asset template engines", :verbose => false
-     and helpers
-    gem 'haml-rails'
-  RUBY
+  # The space alignment annoys me SO MUCH
+  gsub_file "Gemfile", /(gem 'sass-rails')(?:,\s{2,}(.*))?/, "\\1, \\2"
 
-  inject_into_file "Gemfile", <<-RUBY.dedent, :after => "gem 'sass-rails'.*?\n", :verbose => false
-    gem "compass", :git => "git://github.com/sj26/compass.git", :branch => "rails31"
-  RUBY
+  inject_into_file "Gemfile", "  gem 'compass-rails'\n", :after => /gem 'sass-rails'.*?\n/, :verbose => false
 
-  inject_into_file "Gemfile", <<-RUBY.dedent, :after => "gem 'coffee-script'.*?\n", :verbose => false
-    gem "therubyracer"
-  RUBY
+  gsub_file "Gemfile", /# gem 'therubyracer'/, "gem 'therubyracer', group: [:production, :staging]"
 
-  # Cut the crap from the end
-  gsub_file "Gemfile", /# Use unicorn.*\Z/, "", :verbose => false
-
+  # TODO: make carrierwave/rmagick optional
   append_file "Gemfile", <<-RUBY.dedent, :verbose => false
-    # Views helpers
+    # Views and helpers
+    gem 'haml-rails'
     gem 'nestive', :git => 'git://github.com/sj26/nestive.git'
-    gem 'formtastic', '~> 2.0.0.rc4'
+    gem 'formtastic'
 
-    # File uploads
-    # XXX: From git for rails 3.1 compatibility
-    gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
-
-    # Concise controllers
-    gem 'inherited_resources'
+    # File uploads with image processing
+    gem 'rmagick'
+    gem 'carrierwave'
 
     group :development, :test do
       # Debugging everywhere
       gem 'ruby-debug', :platform => :ruby_18
       gem 'ruby-debug19', :platform => :ruby_19, :require => 'ruby-debug'
+    end
 
+    group :test do
       # Testing
       gem 'rspec-rails'
-      gem 'rcov'
-      gem 'rr'
+      gem 'shoulda-matchers'
+      gem 'simplecov'
       gem 'factory_girl'
       gem 'ffaker'
 
       # Acceptance testing
-      # gem 'cucumber-rails'
+      gem 'cucumber-rails'
 
       # Continuous testing/building
       gem 'guard'
       gem 'guard-ego'
       gem 'guard-bundler'
       gem 'guard-rspec'
-      # gem 'guard-cucumber'
-    end
-
-    group :test do
-      # Remarkable matchers for terse and expressive specs
-      gem 'remarkable', '>= 4.0.0.alpha'
-      gem 'remarkable_activerecord', '>= 4.0.0.alpha'
+      gem 'guard-cucumber'
     end
 
     # When testing on the mac in guard...
     group :test_mac do
       # Growl for notifications
-      gem 'growl'
+      gem 'ruby_gntp'
 
       # FSEvent for efficient file monitoring in
       gem 'rb-fsevent'

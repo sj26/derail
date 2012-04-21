@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.8.7'
 
-  s.add_dependency "railties", ">= 3.1.rc4"
-  s.add_dependency "formtastic", ">= 2.0.0.rc3"
+  s.add_dependency "rails", "~> 3.2"
+  s.add_dependency "formtastic"
   s.add_dependency "hpricot"
 end

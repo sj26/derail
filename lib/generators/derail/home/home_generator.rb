@@ -4,10 +4,8 @@ module Derail::Generators
       generate "controller", "home", "show"
     end
 
-    def add_route
-      insert_into_file "config/routes.rb", <<-ROUTES.redent(2), :before => %r{^end$}
-        root :to => "home#show"
-      ROUTES
+    def change_route
+      gsub_file "config/routes.rb", %{get "home/show"}, %{root to: "home#show"}
     end
   end
 end

@@ -43,7 +43,7 @@ module Derail::Generators
     end
 
     def configure_action_mailer
-      inject_into_file "config/environments/development.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+      inject_into_file "config/environments/development.rb", <<-RUBY.redent(2), :after => /config\.action_mailer.*?\n/
 
         # Development URL
         config.action_mailer.default_url_options = { :host => '#{app_slug}.dev' }
@@ -52,22 +52,28 @@ module Derail::Generators
         config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
       RUBY
 
-      inject_into_file "config/environments/test.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+      inject_into_file "config/environments/test.rb", <<-RUBY.redent(2), :after => /config\.action_mailer.*?\n/
 
         # Testing URL
         config.action_mailer.default_url_options = { :host => '#{app_slug}.test' }
       RUBY
 
-      inject_into_file "config/environments/staging.rb", <<-RUBY.redent(2), :after => /config.action_mailer.*?\n/
+      inject_into_file "config/environments/staging.rb", <<-RUBY.redent(2), :after => /config\.action_mailer.*?\n/
 
-        # Testing URL
-        config.action_mailer.default_url_options = { :host => '#{app_slug}.test' }
+        # Staging URL
+        config.action_mailer.default_url_options = { :host => '#{app_slug}.tfgdev.com.au' }
+      RUBY
+
+      inject_into_file "config/environments/production.rb", <<-RUBY.redent(2), :after => /config\.action_mailer.*?\n/
+
+        # Production URL
+        config.action_mailer.default_url_options = { :host => '#{app_slug}.com' }
       RUBY
     end
 
-    def staging_nginx_sendfile
-      gsub_file 'config/environments/staging.rb', 'x_sendfile_header = "X-Sendfile"', 'x_sendfile_header = "X-Accel-Redirect"'
-    end
+    #def staging_nginx_sendfile
+    #  gsub_file 'config/environments/staging.rb', 'x_sendfile_header = "X-Sendfile"', 'x_sendfile_header = "X-Accel-Redirect"'
+    #end
 
     def configure_sass
       inject_into_file "config/application.rb", <<-RUBY.redent(4), :after => /config\.assets[^\n]*\n/
@@ -95,11 +101,12 @@ module Derail::Generators
       HTACCESS
     end
 
-    def disallow_robots
-      # Rewrite robots file to disallow indexing until production
-      # TODO: Make this smarter... make an engine route in not-production for disallows or override in nginx for staging
-      gsub_file "public/robots.txt", %r{^# (\S+:)}, "\\1"
-    end
+    # XXX: tfg_cap does this, but we should do it better.
+    # TODO: add initializer to, when not production, add middleware serving robots.txt with disallow
+    #def disallow_robots
+    #  # Rewrite robots file to disallow indexing until production
+    #  gsub_file "public/robots.txt", %r{^# (\S+:)}, "\\1"
+    #end
 
     def clean_routes
       gsub_file "config/routes.rb", %r{^\s*#[^\n]*\n}, ""
@@ -113,15 +120,6 @@ module Derail::Generators
     def install_cucumber
       # TODO: Make optional
       generate "cucumber:install"
-    end
-
-    def install_rr
-      gsub_file "spec/spec_helper.rb", /[ \t]*# == Mock Framework\n(.*)\n[ \t]*config\.mock_with[ \t]*\S+\n/m, <<-RUBY.redent(2)
-        # == Mock Framework
-        config.mock_with :rr
-      RUBY
-
-      # TODO: Insert RR cucumber support
     end
 
     def install_guard
@@ -184,13 +182,19 @@ module Derail::Generators
       remove_file "app/assets/images/rails.png"
     end
 
-    def add_gitignore
-      create_file ".gitignore", <<-GITIGNORE.dedent
-        .bundle
-        log/*.log
-        tmp
+    def append_gitignore
+      append_file ".gitignore", <<-GITIGNORE.dedent
+
+        # Carrierwave uploads
+        public/uploads
+
+        # Vendored bundle
         vendor/bundle
       GITIGNORE
+    end
+
+    def setup_database
+      rake "db:create db:migrate"
     end
 
     def setup_git

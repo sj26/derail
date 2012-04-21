@@ -11,8 +11,8 @@
     = area :user_nav do
       %ul<>
         - if user_signed_in?
-          %li.user<>= activated_link_to current_user, current_user
-          %li.destroy_user_session<>= activated_link_to t(:destroy_user_session, :scope => [:user_nav, :nav], :default => 'Sign out'), destroy_user_session_path
+          %li.user<>= current_user
+          %li.destroy_user_session<>= activated_link_to t(:destroy_user_session, :scope => [:user_nav, :nav], :default => 'Sign out'), destroy_user_session_path, method: "delete"
         - else
           %li.new_user_session<>= activated_link_to t(:new_user_registration, :scope => [:user_nav, :nav], :default => 'Sign in'), new_user_session_path
           %li.new_user_registration<>= activated_link_to t(:new_user_registration, :scope => [:user_nav, :nav], :default => 'Sign up'), new_user_registration_path
